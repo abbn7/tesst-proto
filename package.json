@@ -1,6 +1,9 @@
 {
   "name": "glass-opus-shine",
   "private": true,
+  "engines": {
+    "node": "22.x"
+  },
   "sideEffects": ["**/*.css"],
   "type": "module",
   "scripts": {

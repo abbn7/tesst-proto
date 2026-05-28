@@ -5,7 +5,6 @@
   "outputDirectory": "dist",
   "cleanUrls": true,
   "trailingSlash": false,
-  "nodejs": "22.x",
   "rewrites": [
     {
       "source": "/((?!assets/|favicon.svg|og.jpg|robots.txt|sitemap.xml).* )",
