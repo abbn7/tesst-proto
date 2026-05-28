@@ -1,0 +1,350 @@
+@import url("https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,300;9..144,400;9..144,500;9..144,600;9..144,700&family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&family=IBM+Plex+Sans+Arabic:wght@300;400;500;600;700&display=swap");
+@import "tailwindcss" source(none);
+@source "../src";
+@import "tw-animate-css";
+
+@custom-variant dark (&:is(.dark *));
+
+@theme inline {
+  --radius-sm: calc(var(--radius) - 4px);
+  --radius-md: calc(var(--radius) - 2px);
+  --radius-lg: var(--radius);
+  --radius-xl: calc(var(--radius) + 4px);
+  --radius-2xl: calc(var(--radius) + 8px);
+  --radius-3xl: calc(var(--radius) + 12px);
+  --radius-4xl: calc(var(--radius) + 16px);
+
+  --color-background: var(--bg-primary);
+  --color-foreground: var(--text-primary);
+  --color-primary: var(--accent-blue);
+  --color-primary-foreground: #ffffff;
+  --color-secondary: var(--bg-secondary);
+  --color-secondary-foreground: var(--text-primary);
+  --color-muted: var(--bg-tertiary);
+  --color-muted-foreground: var(--text-secondary);
+  --color-accent: var(--bg-tertiary);
+  --color-accent-foreground: var(--text-primary);
+  --color-border: var(--separator);
+
+  /* Surface tokens — used as bg-bg-primary / text-text-primary etc. */
+  --color-bg-primary: var(--bg-primary);
+  --color-bg-secondary: var(--bg-secondary);
+  --color-bg-tertiary: var(--bg-tertiary);
+  --color-text-primary: var(--text-primary);
+  --color-text-secondary: var(--text-secondary);
+  --color-text-tertiary: var(--text-tertiary);
+  --color-separator: var(--separator);
+
+  /* Accent tokens — exposed as Tailwind utilities (text-accent-blue, bg-accent-mint, …) */
+  --color-accent-blue: var(--accent-blue);
+  --color-accent-blue-hover: var(--accent-blue-hover);
+  --color-accent-indigo: var(--accent-indigo);
+  --color-accent-pink: var(--accent-pink);
+  --color-accent-mint: var(--accent-mint);
+  --color-accent-peach: var(--accent-peach);
+  --color-accent-gold: var(--accent-gold);
+  --color-accent-lilac: var(--accent-lilac);
+  --color-accent-teal: var(--accent-teal);
+  --color-accent-pearl: var(--accent-blue);
+  --color-accent-lavender: var(--accent-lilac);
+  --color-accent-champagne: var(--accent-gold);
+
+  --font-sans: -apple-system, BlinkMacSystemFont, "SF Pro Display", "SF Pro Text", "Inter", "IBM Plex Sans Arabic", "Helvetica Neue", Arial, sans-serif;
+  --font-display: "Fraunces", "SF Pro Display", -apple-system, serif;
+  --font-mono: "JetBrains Mono", monospace;
+}
+
+:root {
+  --radius: 18px;
+
+  /* Surfaces — soft pearl off-white */
+  --bg-primary: oklch(0.985 0.003 280);
+  --bg-secondary: oklch(0.995 0.002 280);
+  --bg-tertiary: oklch(0.955 0.005 280);
+  --text-primary: oklch(0.18 0.01 280);
+  --text-secondary: oklch(0.46 0.012 280);
+  --text-tertiary: oklch(0.68 0.012 280);
+  --separator: oklch(0.18 0.01 280 / 0.08);
+
+  /* Multi-accent Apple palette — all low-chroma, soft */
+  --accent-blue:    oklch(0.72 0.10 240);
+  --accent-blue-hover: oklch(0.66 0.12 240);
+  --accent-indigo:  oklch(0.70 0.11 285);
+  --accent-pink:    oklch(0.82 0.08 350);
+  --accent-mint:    oklch(0.86 0.08 165);
+  --accent-peach:   oklch(0.86 0.07 50);
+  --accent-gold:    oklch(0.85 0.07 90);
+  --accent-lilac:   oklch(0.80 0.07 310);
+  --accent-teal:    oklch(0.78 0.08 195);
+  /* legacy aliases used in existing components */
+  --accent-pearl:    var(--accent-blue);
+  --accent-lavender: var(--accent-lilac);
+  --accent-champagne: var(--accent-gold);
+
+  /* Glass — clearly see-through */
+  --glass-bg: oklch(1 0 0 / 0.42);
+  --glass-bg-strong: oklch(1 0 0 / 0.58);
+  --glass-bg-clear: oklch(1 0 0 / 0.22);
+  --glass-highlight: oklch(1 0 0 / 0.7);
+  --glass-edge-light: oklch(1 0 0 / 0.55);
+  --glass-edge-dark:  oklch(0.18 0.01 280 / 0.06);
+  --glass-shadow:
+    0 1px 0 oklch(1 0 0 / 0.6) inset,
+    0 -1px 0 oklch(1 0 0 / 0.18) inset,
+    0 0 0 0.5px oklch(1 0 0 / 0.5) inset,
+    0 0 0 0.5px oklch(0.18 0.01 280 / 0.06),
+    0 12px 32px -8px oklch(0.18 0.01 280 / 0.10),
+    0 2px 8px -2px oklch(0.18 0.01 280 / 0.06);
+}
+
+.dark {
+  --bg-primary: oklch(0.13 0.01 280);
+  --bg-secondary: oklch(0.18 0.012 280);
+  --bg-tertiary: oklch(0.22 0.012 280);
+  --text-primary: oklch(0.97 0.003 280);
+  --text-secondary: oklch(0.72 0.01 280);
+  --text-tertiary: oklch(0.50 0.01 280);
+  --separator: oklch(1 0 0 / 0.08);
+
+  --glass-bg: oklch(0.22 0.012 280 / 0.42);
+  --glass-bg-strong: oklch(0.22 0.012 280 / 0.62);
+  --glass-bg-clear: oklch(0.22 0.012 280 / 0.22);
+  --glass-highlight: oklch(1 0 0 / 0.12);
+  --glass-edge-light: oklch(1 0 0 / 0.10);
+  --glass-edge-dark:  oklch(0 0 0 / 0.4);
+  --glass-shadow:
+    0 1px 0 oklch(1 0 0 / 0.10) inset,
+    0 -1px 0 oklch(0 0 0 / 0.4) inset,
+    0 0 0 0.5px oklch(1 0 0 / 0.08) inset,
+    0 0 0 0.5px oklch(0 0 0 / 0.4),
+    0 16px 40px -8px oklch(0 0 0 / 0.5),
+    0 2px 8px -2px oklch(0 0 0 / 0.3);
+}
+
+@layer base {
+  * { border-color: var(--separator); }
+
+  body {
+    background-color: var(--bg-primary);
+    color: var(--text-primary);
+    font-family: var(--font-sans);
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    overflow-x: hidden;
+  }
+  html[dir="rtl"] body { font-family: "IBM Plex Sans Arabic", var(--font-sans); }
+  h1,h2,h3,h4,h5,h6 { color: var(--text-primary); }
+
+  ::selection { background: color-mix(in oklab, var(--accent-blue) 60%, transparent); color: #fff; }
+
+  ::-webkit-scrollbar { width: 8px; height: 8px; }
+  ::-webkit-scrollbar-track { background: transparent; }
+  ::-webkit-scrollbar-thumb {
+    background: var(--text-tertiary);
+    border-radius: 999px;
+    border: 2px solid transparent;
+    background-clip: padding-box;
+  }
+  ::-webkit-scrollbar-thumb:hover { background: var(--text-secondary); background-clip: padding-box; }
+
+  @media (prefers-reduced-motion: reduce) {
+    *, *::before, *::after { animation: none !important; transition: none !important; }
+  }
+}
+
+@layer components {
+  /* ============ GLASS SYSTEM — visionOS specular ============ */
+  .glass-base {
+    position: relative;
+    background: var(--glass-bg);
+    -webkit-backdrop-filter: blur(28px) saturate(180%) brightness(1.04);
+    backdrop-filter: blur(28px) saturate(180%) brightness(1.04);
+    box-shadow: var(--glass-shadow);
+    border-radius: var(--radius);
+    isolation: isolate;
+  }
+  .glass-base::before {
+    content: "";
+    position: absolute; inset: 0;
+    border-radius: inherit;
+    background: linear-gradient(to bottom, var(--glass-highlight) 0%, transparent 30%, transparent 70%, oklch(1 0 0 / 0.06) 100%);
+    pointer-events: none; z-index: 1;
+  }
+
+  .glass-subtle {
+    background: var(--glass-bg-clear);
+    -webkit-backdrop-filter: blur(18px) saturate(160%);
+    backdrop-filter: blur(18px) saturate(160%);
+    border: 0.5px solid var(--glass-edge-light);
+    box-shadow:
+      0 1px 0 var(--glass-highlight) inset,
+      0 4px 16px -4px oklch(0.18 0.01 280 / 0.08);
+    border-radius: 14px;
+  }
+
+  .glass-card {
+    position: relative;
+    background: var(--glass-bg);
+    -webkit-backdrop-filter: blur(28px) saturate(180%) brightness(1.04);
+    backdrop-filter: blur(28px) saturate(180%) brightness(1.04);
+    box-shadow: var(--glass-shadow);
+    border-radius: 22px;
+    overflow: hidden;
+    transition: transform 500ms cubic-bezier(0.16,1,0.3,1), box-shadow 500ms cubic-bezier(0.16,1,0.3,1);
+  }
+  .glass-card::before {
+    content: "";
+    position: absolute; inset: 0; border-radius: inherit; pointer-events: none; z-index: 1;
+    background: linear-gradient(160deg, var(--glass-highlight) 0%, transparent 35%, transparent 65%, oklch(1 0 0 / 0.08) 100%);
+  }
+  .glass-card > * { position: relative; z-index: 2; }
+  .glass-card:hover {
+    transform: translateY(-3px);
+    box-shadow:
+      0 1px 0 var(--glass-highlight) inset,
+      0 -1px 0 oklch(1 0 0 / 0.18) inset,
+      0 0 0 0.5px oklch(1 0 0 / 0.6) inset,
+      0 0 0 0.5px oklch(0.18 0.01 280 / 0.08),
+      0 24px 48px -12px oklch(0.18 0.01 280 / 0.18),
+      0 4px 12px -4px oklch(0.18 0.01 280 / 0.10);
+  }
+
+  .glass-elevated {
+    position: relative;
+    background: var(--glass-bg-strong);
+    -webkit-backdrop-filter: blur(40px) saturate(190%) brightness(1.05);
+    backdrop-filter: blur(40px) saturate(190%) brightness(1.05);
+    box-shadow:
+      0 1px 0 var(--glass-highlight) inset,
+      0 -1px 0 oklch(1 0 0 / 0.20) inset,
+      0 0 0 0.5px oklch(1 0 0 / 0.65) inset,
+      0 0 0 0.5px oklch(0.18 0.01 280 / 0.08),
+      0 24px 60px -12px oklch(0.18 0.01 280 / 0.18),
+      0 4px 16px -4px oklch(0.18 0.01 280 / 0.10);
+    border-radius: 26px;
+  }
+  .glass-elevated::before {
+    content: "";
+    position: absolute; inset: 0; border-radius: inherit; pointer-events: none;
+    background: linear-gradient(160deg, var(--glass-highlight) 0%, transparent 30%);
+  }
+
+  .glass-clear {
+    background: var(--glass-bg-clear);
+    -webkit-backdrop-filter: blur(14px) saturate(160%);
+    backdrop-filter: blur(14px) saturate(160%);
+    border: 0.5px solid var(--glass-edge-light);
+    box-shadow: 0 1px 0 var(--glass-highlight) inset;
+    border-radius: 18px;
+  }
+
+  .glass-frost {
+    background: var(--glass-bg-strong);
+    -webkit-backdrop-filter: blur(60px) saturate(200%);
+    backdrop-filter: blur(60px) saturate(200%);
+    border: 0.5px solid var(--glass-edge-light);
+    box-shadow: var(--glass-shadow);
+    border-radius: 22px;
+  }
+
+  /* legacy alias — inlined (Tailwind v4 forbids @apply of custom classes) */
+  .glass-ultra {
+    position: relative;
+    background: var(--glass-bg-strong);
+    -webkit-backdrop-filter: blur(40px) saturate(190%) brightness(1.05);
+    backdrop-filter: blur(40px) saturate(190%) brightness(1.05);
+    box-shadow:
+      0 1px 0 var(--glass-highlight) inset,
+      0 -1px 0 oklch(1 0 0 / 0.20) inset,
+      0 0 0 0.5px oklch(1 0 0 / 0.65) inset,
+      0 0 0 0.5px oklch(0.18 0.01 280 / 0.08),
+      0 24px 60px -12px oklch(0.18 0.01 280 / 0.18),
+      0 4px 16px -4px oklch(0.18 0.01 280 / 0.10);
+    border-radius: 26px;
+  }
+
+  .glass-nav {
+    background: oklch(0.99 0.003 280 / 0.6);
+    -webkit-backdrop-filter: blur(22px) saturate(180%);
+    backdrop-filter: blur(22px) saturate(180%);
+    border-bottom: 0.5px solid var(--separator);
+  }
+  .dark .glass-nav { background: oklch(0.13 0.01 280 / 0.6); }
+
+  /* Tinted glass — subtle accent wash */
+  .glass-tint-blue   { background: color-mix(in oklab, var(--accent-blue)   18%, var(--glass-bg)); }
+  .glass-tint-indigo { background: color-mix(in oklab, var(--accent-indigo) 18%, var(--glass-bg)); }
+  .glass-tint-pink   { background: color-mix(in oklab, var(--accent-pink)   18%, var(--glass-bg)); }
+  .glass-tint-mint   { background: color-mix(in oklab, var(--accent-mint)   18%, var(--glass-bg)); }
+  .glass-tint-peach  { background: color-mix(in oklab, var(--accent-peach)  18%, var(--glass-bg)); }
+  .glass-tint-gold   { background: color-mix(in oklab, var(--accent-gold)   18%, var(--glass-bg)); }
+  .glass-tint-lilac  { background: color-mix(in oklab, var(--accent-lilac)  18%, var(--glass-bg)); }
+  .glass-tint-teal   { background: color-mix(in oklab, var(--accent-teal)   18%, var(--glass-bg)); }
+
+  /* Edge ring helper */
+  .glass-edge {
+    box-shadow:
+      0 0 0 0.5px oklch(1 0 0 / 0.5) inset,
+      0 0 0 0.5px oklch(0.18 0.01 280 / 0.08);
+  }
+
+  /* Typography */
+  .text-display {
+    font-family: var(--font-display);
+    font-size: clamp(3rem, 10vw, 9rem);
+    font-weight: 500;
+    letter-spacing: -0.04em;
+    line-height: 0.95;
+  }
+  h1 { font-weight: 600; letter-spacing: -0.03em; }
+  h2 { font-weight: 600; letter-spacing: -0.02em; }
+  .body-large { font-size: 1.125rem; line-height: 1.6; letter-spacing: -0.01em; }
+  .caption { font-size: 0.7rem; letter-spacing: 0.18em; text-transform: uppercase; font-weight: 500; }
+
+  /* Utilities */
+  .hairline { height: 0.5px; background: var(--separator); }
+  .badge-pill { border-radius: 980px; padding: 5px 14px; font-size: 13px; font-weight: 500; }
+  .availability-dot {
+    width: 8px; height: 8px; border-radius: 50%;
+    background: var(--accent-mint);
+    box-shadow: 0 0 8px color-mix(in oklab, var(--accent-mint) 70%, transparent);
+    animation: pulse-dot 2s ease-in-out infinite;
+  }
+  .text-gradient {
+    background: linear-gradient(135deg, var(--text-primary) 0%, var(--text-secondary) 100%);
+    -webkit-background-clip: text; background-clip: text; color: transparent;
+  }
+  .text-gradient-soft {
+    background: linear-gradient(135deg, var(--accent-indigo), var(--accent-pink), var(--accent-mint));
+    -webkit-background-clip: text; background-clip: text; color: transparent;
+  }
+  .marquee-text {
+    background: linear-gradient(135deg, var(--accent-indigo), var(--accent-blue), var(--accent-mint));
+    -webkit-background-clip: text; background-clip: text; color: transparent;
+    opacity: 0.85;
+  }
+}
+
+@keyframes aurora-drift {
+  0%, 100% { transform: translate(0, 0) scale(1); }
+  33% { transform: translate(5%, -5%) scale(1.05); }
+  66% { transform: translate(-5%, 5%) scale(0.98); }
+}
+.aurora-blob {
+  position: absolute; border-radius: 50%;
+  filter: blur(120px); will-change: transform;
+  animation: aurora-drift 30s ease-in-out infinite;
+}
+@keyframes pulse-dot {
+  0%, 100% { box-shadow: 0 0 8px color-mix(in oklab, var(--accent-mint) 70%, transparent); }
+  50% { box-shadow: 0 0 14px color-mix(in oklab, var(--accent-mint) 90%, transparent); }
+}
+@keyframes marquee-x {
+  from { transform: translateX(0); } to { transform: translateX(-50%); }
+}
+.animate-marquee-x { animation: marquee-x 40s linear infinite; }
+@keyframes ring-pulse {
+  0% { box-shadow: 0 0 0 0 color-mix(in oklab, var(--accent-blue) 40%, transparent); }
+  100% { box-shadow: 0 0 0 24px transparent; }
+}
+.animate-ring { animation: ring-pulse 1.6s ease-out infinite; }
