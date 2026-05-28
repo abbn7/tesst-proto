@@ -1,8 +1,10 @@
 import { motion, useReducedMotion } from "framer-motion";
+import { useMobile } from "@/hooks/use-mobile";
 
 const EASE = [0.16, 1, 0.3, 1] as const;
 
 export function KineticHeading({
+  const { isMobile } = useMobile();
   text,
   className,
   stagger = 0.025,
@@ -15,6 +17,19 @@ export function KineticHeading({
 }) {
   const reduce = useReducedMotion();
   if (reduce) return <span className={className}>{text}</span>;
+
+  if (isMobile) {
+    return (
+      <motion.span
+        initial={{ opacity: 0, y: 10 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.6, delay, ease: EASE }}
+        className={className}
+      >
+        {text}
+      </motion.span>
+    );
+  }
 
   const words = text.split(" ");
   let charIdx = 0;

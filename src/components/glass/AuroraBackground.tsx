@@ -1,6 +1,10 @@
 import { useEffect, useRef } from "react";
+import { useMobile } from "@/hooks/use-mobile";
 
 export function AuroraBackground() {
+  const { isMobile } = useMobile();
+
+  if (isMobile) return null;
   const orb = useRef<HTMLDivElement>(null);
   useEffect(() => {
     let raf = 0;
@@ -29,11 +33,16 @@ export function AuroraBackground() {
   return (
     <div aria-hidden className="fixed inset-0 -z-10 overflow-hidden pointer-events-none" style={{ background: "var(--bg-primary)" }}>
       {/* multi-accent aurora — soft Apple palette */}
-      <div className="aurora-blob" style={{ width: "60vw", height: "60vw", top: "-20%", left: "-10%", background: "var(--accent-indigo)", opacity: "var(--blob-opacity, 0.32)", animationDuration: "42s" }} />
-      <div className="aurora-blob" style={{ width: "55vw", height: "55vw", top: "5%", right: "-15%", background: "var(--accent-pink)", opacity: "var(--blob-opacity, 0.28)", animationDuration: "48s", animationDelay: "-6s" }} />
-      <div className="aurora-blob" style={{ width: "50vw", height: "50vw", bottom: "-15%", left: "5%", background: "var(--accent-mint)", opacity: "var(--blob-opacity, 0.30)", animationDuration: "52s", animationDelay: "-12s" }} />
-      <div className="aurora-blob" style={{ width: "45vw", height: "45vw", bottom: "10%", right: "5%", background: "var(--accent-peach)", opacity: "var(--blob-opacity, 0.28)", animationDuration: "46s", animationDelay: "-18s" }} />
-      <div className="aurora-blob" style={{ width: "40vw", height: "40vw", top: "40%", left: "35%", background: "var(--accent-lilac)", opacity: "var(--blob-opacity, 0.22)", animationDuration: "55s", animationDelay: "-22s" }} />
+          {/* multi-accent aurora — soft Apple palette */}
+          {!isMobile && (
+            <>
+              <div className="aurora-blob" style={{ width: "60vw", height: "60vw", top: "-20%", left: "-10%", background: "var(--accent-indigo)", opacity: "var(--blob-opacity, 0.32)", animationDuration: "42s" }} />
+              <div className="aurora-blob" style={{ width: "55vw", height: "55vw", top: "5%", right: "-15%", background: "var(--accent-pink)", opacity: "var(--blob-opacity, 0.28)", animationDuration: "48s", animationDelay: "-6s" }} />
+              <div className="aurora-blob" style={{ width: "50vw", height: "50vw", bottom: "-15%", left: "5%", background: "var(--accent-mint)", opacity: "var(--blob-opacity, 0.30)", animationDuration: "52s", animationDelay: "-12s" }} />
+              <div className="aurora-blob" style={{ width: "45vw", height: "45vw", bottom: "10%", right: "5%", background: "var(--accent-peach)", opacity: "var(--blob-opacity, 0.28)", animationDuration: "46s", animationDelay: "-18s" }} />
+              <div className="aurora-blob" style={{ width: "40vw", height: "40vw", top: "40%", left: "35%", background: "var(--accent-lilac)", opacity: "var(--blob-opacity, 0.22)", animationDuration: "55s", animationDelay: "-22s" }} />
+            </>
+          )}
 
       {/* mouse-tracked subtle highlight */}
       <div

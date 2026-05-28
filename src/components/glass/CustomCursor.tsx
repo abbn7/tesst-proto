@@ -1,7 +1,11 @@
 import { useEffect, useState } from "react";
+import { useMobile } from "@/hooks/use-mobile";
 import { motion, useMotionValue, useSpring } from "framer-motion";
 
 export function CustomCursor() {
+  const { isMobile } = useMobile();
+
+  if (isMobile) return null;
   const [enabled, setEnabled] = useState(false);
   const [hovering, setHovering] = useState(false);
   const x = useMotionValue(-100);
@@ -33,7 +37,7 @@ export function CustomCursor() {
     };
   }, [x, y]);
 
-  if (!enabled) return null;
+  if (!enabled || isMobile) return null;
 
   return (
     <motion.div

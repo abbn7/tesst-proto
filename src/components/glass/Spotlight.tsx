@@ -1,7 +1,11 @@
 import { useRef, type ReactNode, type MouseEvent } from "react";
+import { useMobile } from "@/hooks/use-mobile";
 import { cn } from "@/lib/utils";
 
 export function Spotlight({
+  const { isMobile } = useMobile();
+
+  if (isMobile) return <>{children}</>;
   children,
   className,
   tint = "var(--accent-pearl)",
@@ -25,14 +29,16 @@ export function Spotlight({
       className={cn("relative group/spot overflow-hidden", className)}
       style={{ ["--spot-tint" as string]: tint }}
     >
-      <div
-        aria-hidden
-        className="pointer-events-none absolute inset-0 opacity-0 group-hover/spot:opacity-100 transition-opacity duration-500"
-        style={{
-          background:
-            "radial-gradient(420px circle at var(--mx, 50%) var(--my, 50%), color-mix(in oklab, var(--spot-tint) 55%, transparent) 0%, transparent 60%)",
-        }}
-      />
+      {!isMobile && (
+        <div
+          aria-hidden
+          className="pointer-events-none absolute inset-0 opacity-0 group-hover/spot:opacity-100 transition-opacity duration-500"
+          style={{
+            background:
+              "radial-gradient(420px circle at var(--mx, 50%) var(--my, 50%), color-mix(in oklab, var(--spot-tint) 55%, transparent) 0%, transparent 60%)",
+          }}
+        />
+      )}
       {children}
     </div>
   );

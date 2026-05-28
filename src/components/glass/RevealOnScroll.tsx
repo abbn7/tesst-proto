@@ -1,9 +1,11 @@
 import { motion, useReducedMotion } from "framer-motion";
+import { useMobile } from "@/hooks/use-mobile";
 import type { ReactNode } from "react";
 
 const EASE = [0.16, 1, 0.3, 1] as const;
 
 export function RevealOnScroll({
+  const { isMobile } = useMobile();
   children,
   delay = 0,
   y = 24,
@@ -18,10 +20,10 @@ export function RevealOnScroll({
   if (reduce) return <div className={className}>{children}</div>;
   return (
     <motion.div
-      initial={{ opacity: 0, y, filter: "blur(8px)" }}
-      whileInView={{ opacity: 1, y: 0, filter: "blur(0px)" }}
-      viewport={{ once: true, amount: 0.2 }}
-      transition={{ duration: 0.9, delay, ease: EASE }}
+      initial={{ opacity: 0, y, filter: isMobile ? "none" : "blur(8px)" }}
+      whileInView={{ opacity: 1, y: 0, filter: isMobile ? "none" : "blur(0px)" }}
+      viewport={{ once: true, amount: 0.1 }}
+      transition={{ duration: isMobile ? 0.5 : 0.9, delay: isMobile ? delay * 0.5 : delay, ease: EASE }}
       className={className}
     >
       {children}
